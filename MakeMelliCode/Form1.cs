@@ -73,5 +73,35 @@ namespace MakeMelliCode
             }
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string number123 = "0123456789";
+            byte[] bytes = Guid.NewGuid().ToByteArray();
+            int seed = BitConverter.ToInt32(bytes, 0);
+            Random rnd = new Random(seed);
+
+            string sumnumber = string.Empty;
+            for (int i = 0; i < 9; i++)
+            {
+                int randomNumber = rnd.Next(1, 9);
+                sumnumber += number123[randomNumber];
+            }
+
+            int numberPosition = 10;
+            int sum = 0;
+            for (int i = 0; i < 9; i++)
+            {
+                int number = Convert.ToInt32(sumnumber[i].ToString()) * numberPosition;
+                sum += number;
+                numberPosition--;
+            }
+
+            int numberControl = (11 - (sum % 11)) % 10;
+            string ss = sumnumber + Convert.ToString(numberControl);
+
+            textBox1.Text = ss;
+        }
+
     }
 }
